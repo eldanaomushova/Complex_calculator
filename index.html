@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Complex Calculator</title>
+    <link rel="stylesheet" href="styles/style.css">
+</head>
+<body>
+    <div class="container">
+        <input type="text" class="display-result" id="screen" readonly>
+        <div class="buttons" onclick="handleButtonClick(event)">
+            <div class="button" data-value="CE" id="ce-btn">CE</div>
+            <div class="button" data-value="x!">x!</div>
+            <div class="button" data-value="(">(</div>
+            <div class="button" data-value=")">)</div>
+            <div class="button" data-value="%">%</div>
+            <div class="button" id="ce-btn" data-value="AC">AC</div>
+            <div class="button" data-value="sin">sin</div>
+            <div class="button" data-value="pi">&Pi;</div>
+            <div class="button" data-value="7">7</div>
+            <div class="button" data-value="8">8</div>
+            <div class="button" data-value="9">9</div>
+            <div class="button" data-value="/">&#247;</div>
+            <div class="button" data-value="cos">cos</div>
+            <div class="button" data-value="log">log</div>
+            <div class="button" data-value="4">4</div>
+            <div class="button" data-value="5">5</div>
+            <div class="button" data-value="6">6</div>
+            <div class="button" data-value="*">&#215;</div>
+            <div class="button" data-value="tan">tan</div>
+            <div class="button" data-value="root">&#8730;</div>
+            <div class="button" data-value="1">1</div>
+            <div class="button" data-value="2">2</div>
+            <div class="button" data-value="3">3</div>
+            <div class="button" data-value="-">&#8722;</div>
+            <div class="button" data-value="e">e</div>
+            <div class="button" data-value="^">x<sup>y</sup></div>
+            <div class="button" data-value="0">0</div>
+            <div class="button" data-value=".">.</div>
+            <div class="button" id="equal-btn"  data-value="=">&#61;</div>
+            <div class="button" data-value="+">&#43;</div>
+        </div>
+
+    </input>
+    <script>
+        var screen = document.getElementById('screen');
+        function handleButtonClick(event) {
+            const clickedButton = event.target;
+            const buttonValue = clickedButton.dataset.value;
+            try {
+                switch (buttonValue) {
+                case 'CE':
+                var currentValue = screen.value;
+                if (currentValue.length > 0) {
+                    screen.value = currentValue.slice(0, -1);
+                }
+                    break;
+                case 'x!':
+                    var i, num, f;
+                    f = 1
+                    num = screen.value;
+                    for (i = 1; i <= num; i++) {
+                        f = f * i;
+                    }
+                    i = i - 1;
+                    screen.value = f;
+                    break;
+                case 'sin':
+                    screen.value = Math.sin(screen.value);
+                    break;
+                case 'cos':
+                    screen.value = Math.cos(screen.value);
+                    break;
+                case 'tan':
+                    screen.value = Math.tan(screen.value);
+                    break;
+                case '^':
+                    screen.value = Math.pow(screen.value, 2);
+                    break;
+                case 'root':
+                    screen.value = Math.sqrt(screen.value, 2);
+                    break;
+                case 'log':
+                    screen.value = Math.log(screen.value);
+                    break;
+                case 'pi':
+                    screen.value = 3.14159265359;
+                    break;
+                case 'e':
+                    screen.value = 2.71828182846;
+                    break;
+                case 'AC':
+                    screen.value = '';
+                    break;
+                case '=':
+                    var inputValue = screen.value;
+                    var result = eval(inputValue);
+                    if (isNaN(result) || result === Infinity) {
+                        screen.value = 'Error';
+                    }else{
+                        screen.value = result;
+                    }
+                    break;
+                default:
+                    screen.value += buttonValue;
+                    break;
+                }
+            } catch (error) {
+                screen.value = "Error"
+            }
+            
+            }
+    </script>
+</body>
+</html>
